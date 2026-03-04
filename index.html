@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地球心跳探險：地震學互動教室</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax for Formulas -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'PingFang TC', 'Helvetica Neue', 'Microsoft JhengHei', sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+        .hero-pattern {
+            background-color: #1e3a8a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .section-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        /* Building Animation CSS */
+        .building {
+            transform-origin: bottom center;
+            transition: transform 0.1s;
+        }
+        .shake-fast { animation: shake-high 0.2s infinite alternate ease-in-out; }
+        .shake-slow { animation: shake-low 0.8s infinite alternate ease-in-out; }
+        
+        @keyframes shake-high {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(5deg); }
+        }
+        @keyframes shake-low {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(15deg); }
+        }
+        
+        .image-container img {
+            max-height: 400px;
+            object-fit: contain;
+            width: 100%;
+            background: #fff;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="hero-pattern text-white py-16 px-6 shadow-lg">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+                <i class="fa-solid fa-earth-americas mr-3"></i>探索地球的心跳：地震學大解密
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-6">
+                哈囉，未來的地球探險家們！👋 我是你們的地震學導師。今天，我們不背生硬的課文，我們要一起潛入地底，聆聽地球最震撼的呼吸聲！準備好揭開斷層的秘密了嗎？Let's go! 🚀
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8 space-y-12">
+
+        <!-- Topic 1 -->
+        <section class="bg-white rounded-2xl shadow-md p-8 section-card border-l-4 border-blue-500">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6"><i class="fa-solid fa-magnifying-glass text-blue-500 mr-2"></i> 主題一：地震學的研究範疇？</h2>
+            
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed mb-6">
+                <p>簡單來說，地震學就是<strong>「用波動來幫地球做超音波檢查」</strong>的科學！🩺</p>
+                <ul class="list-disc pl-6 space-y-2 mt-4">
+                    <li><strong>破解地震機制：</strong> 為什麼會地震？彈性回跳理論告訴我們，板塊就像橡皮筋，持續拉扯累積能量，一旦超過岩石的承受極限就會「啪！」一聲斷裂，釋放巨大能量。</li>
+                    <li><strong>透視地球內部：</strong> 地球內部到底長怎樣？我們無法挖洞到地心，但地震波穿透地球時，會因為遇到不同物質（如液態外地核）而折射或反射。</li>
+                    <li><strong>板塊運動學：</strong> 觀察全球地震的分佈。你知道嗎？<strong>環太平洋火山帶（Ring of Fire）</strong>包辦了全球約 81% 的大地震喔！🔥</li>
+                </ul>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/1.1.1.png" alt="圖1.1-1" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.1.1'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.1-1：地震波從震源出發，抵達測站的過程。就像是在水池丟下一顆石頭，漣漪傳到岸邊。</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/112.png" alt="圖1.1-2" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.1.2'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.1-2：地球內部構造與地震波傳遞路徑的關聯模型。</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/113.png" alt="圖1.1-3" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.1.3'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.1-3：不同深度的地震波走時曲線，這是我們了解地球構造的「X光片」。</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/114.png" alt="圖1.1-4" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.1.4'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.1-4：複雜的地質構造如何使波前產生變形與反射。</p>
+                </div>
+            </div>
+            <div class="flex justify-center mb-6">
+                <div class="image-container w-full max-w-2xl">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/115.png" alt="圖1.1-5" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.1.5'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.1-5：三維地球模型下的地震波傳播模擬。</p>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                <p class="text-blue-800 text-sm font-semibold"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i> 導師的冷知識時間：</p>
+                <p class="text-blue-900 mt-1">S 波（剪力波）就像是上下甩動繩子，它「無法穿過液體」。科學家就是因為發現 S 波在地球對面會出現「陰影帶」，才恍然大悟：原來地球的外地核是液態的！🤯</p>
+            </div>
+        </section>
+
+        <!-- Topic 2 -->
+        <section class="bg-white rounded-2xl shadow-md p-8 section-card border-l-4 border-red-500">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6"><i class="fa-solid fa-triangle-exclamation text-red-500 mr-2"></i> 主題二：Hazard (危害) vs. Risk (風險)，傻傻分不清楚？</h2>
+            
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed">
+                <p>很多同學會把這兩個詞混用，但在防災科學上，它們是完全不同的概念喔！</p>
+                <div class="flex flex-col md:flex-row gap-6 mt-4">
+                    <div class="flex-1 bg-red-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-red-700 mb-2">🌋 Seismic Hazard (地震危害度)</h3>
+                        <p>大自然給的。指的是「特定地點發生強烈地震動的機率與強度」。這跟地質、斷層有關，我們<strong>無法改變</strong>它。</p>
+                        <p class="text-sm mt-2 text-gray-600"><em>比喻：大海裡有一隻飢餓的大白鯊。</em></p>
+                    </div>
+                    <div class="flex-1 bg-orange-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-orange-700 mb-2">🏢 Seismic Risk (地震風險度)</h3>
+                        <p>人類社會承受的。指的是「地震發生後，可能造成的人命傷亡與經濟損失」。這跟人口密度、建築耐震度有關，我們<strong>可以降低</strong>它。</p>
+                        <p class="text-sm mt-2 text-gray-600"><em>比喻：你在大白鯊旁邊游泳（高風險），還是坐在船上看（低風險）。</em></p>
+                    </div>
+                </div>
+                <p class="mt-6"><strong>📊 真實數據時間：</strong><br>
+                美國加州與台灣都位於高 Hazard 區域。1999 年台灣 921 大地震 (規模 7.6) 造成超過 2,400 人罹難；而 2010 年海地地震規模僅 7.0，卻因建築極度脆弱，導致超過 20 萬人喪生。這說明了：<strong>Hazard 決定震動，但 Risk 決定生死！</strong></p>
+            </div>
+        </section>
+
+        <!-- Topic 3 -->
+        <section class="bg-white rounded-2xl shadow-md p-8 section-card border-l-4 border-green-500">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6"><i class="fa-solid fa-wave-square text-green-500 mr-2"></i> 主題三：地震波的長途旅行與能量衰減</h2>
+            
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed mb-6">
+                <p>當地震發生，震央附近的破壞最嚴重，但傳到很遠的地方時，我們只會覺得輕微搖晃。為什麼能量會衰減呢？來看看這條經典的衰減公式 (1)：</p>
+                <div class="bg-gray-100 p-4 rounded-lg text-center my-4 overflow-x-auto">
+                    <p class="text-xl">$$ A(r) = A_0 \times \frac{1}{r} \times e^{-\frac{\pi f r}{Q v}} $$</p>
+                    <p class="text-sm text-gray-500 mt-2">（此為簡化的振幅衰減通用公式）</p>
+                </div>
+                <p>別被數學嚇到！導師幫你翻譯翻譯，衰減主要來自兩個殺手：</p>
+                <ol class="list-decimal pl-6 space-y-2 mt-4">
+                    <li><strong>幾何延展 (Geometric Spreading) - 公式中的 \(\frac{1}{r}\) :</strong> 就像你在操場中心大喊，聲音的能量要均勻散佈到越來越大的球面上。距離 \(r\) 越遠，單位面積分到的能量就越小。</li>
+                    <li><strong>非彈性衰減 (Anelastic Attenuation) - 公式中的 \(e^{-\dots}\) :</strong> 地球不是完美的彈簧！岩石之間有摩擦力，地震波在岩石間擠壓摩擦時，會把一部分動能轉化為<strong>熱能</strong>消耗掉。岩石越軟爛（\(Q\) 值越低），吸收能量越快！</li>
+                </ol>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/123.png" alt="圖1.2-3" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.2.3'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.2-3：地震波在不同地質介質中的波形變化與衰減。</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/125.png" alt="圖1.2-5" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.2.5'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.2-5：盆地效應！柔軟沉積物會讓波速變慢，但振幅（搖晃程度）卻會被放大！</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/126.png" alt="圖1.2-6" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.2.6'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.2-6：不同震央距離觀測到的地震波頻譜差異。</p>
+                </div>
+            </div>
+
+            <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+                <p class="text-green-800 text-sm font-semibold"><i class="fa-solid fa-face-laugh-squint text-green-600 mr-2"></i> 輕鬆一下：</p>
+                <p class="text-green-900 mt-1">為什麼 P 波（Primary wave，縱波）總是比 S 波（Secondary wave，橫波）先到？<br>因為 P 波是用「推」的（像推擠彈簧），比較直接；而 S 波像是在「扭屁股」（上下左右搖），當然走得慢啦！🕺</p>
+            </div>
+        </section>
+
+        <!-- Topic 4 -->
+        <section class="bg-white rounded-2xl shadow-md p-8 section-card border-l-4 border-yellow-500">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6"><i class="fa-solid fa-building text-yellow-500 mr-2"></i> 主題四：建築的防震舞蹈與土壤液化</h2>
+            
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed mb-8">
+                <h3 class="text-2xl font-bold text-gray-800">1. 建材的抵抗力</h3>
+                <p>地震來時，房子不是越硬越好！<br>
+                🪵 <strong>木材/鋼骨 (Steel)：</strong> 具有良好的<strong>「延展性 (Ductility)」</strong>。它們像竹子一樣，搖晃變形後能吸收能量而不會立刻斷裂，是很好的抗震材料。<br>
+                🧱 <strong>無筋磚造/老舊混凝土：</strong> 屬於<strong>「脆性 (Brittle)」</strong>材料。就像餅乾，雖然硬，但一旦超過極限就會瞬間碎裂垮塌。</p>
+
+                <h3 class="text-2xl font-bold text-gray-800 mt-6">2. 建築物高度與「共振效應」</h3>
+                <p>這是一個超酷的物理現象！高樓喜歡「慢搖」（長週期低頻率），矮房喜歡「快搖」（短週期高頻率）。如果地震波的頻率剛好對上建築物的喜好，就會發生<strong>共振 (Resonance)</strong>，搖晃會被無限放大！</p>
+            </div>
+
+            <!-- Interactive Animation -->
+            <div class="bg-gray-800 rounded-xl p-6 text-white text-center mb-8 relative overflow-hidden">
+                <h4 class="text-xl font-bold mb-4">🎮 互動時間：動手製造地震波！</h4>
+                <p class="text-sm text-gray-300 mb-6">滑動下方拉桿，改變地震波的頻率，看看哪棟建築物搖得最厲害？</p>
+                
+                <div class="flex items-end justify-center space-x-12 h-48 mb-6 border-b-4 border-gray-600 pb-2">
+                    <!-- Short Building -->
+                    <div id="short-building" class="building bg-blue-400 w-16 h-20 rounded-t flex items-center justify-center font-bold text-gray-900">
+                        矮房
+                    </div>
+                    <!-- Tall Building -->
+                    <div id="tall-building" class="building bg-yellow-400 w-16 h-40 rounded-t flex items-center justify-center font-bold text-gray-900">
+                        高樓
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center space-x-4 max-w-md mx-auto">
+                    <span class="text-sm font-bold">慢搖 (低頻)</span>
+                    <input type="range" id="eq-slider" min="1" max="10" value="5" class="w-full h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer">
+                    <span class="text-sm font-bold">快搖 (高頻)</span>
+                </div>
+            </div>
+
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed">
+                <h3 class="text-2xl font-bold text-gray-800">3. 土壤液化 (Soil Liquefaction)</h3>
+                <p>想像你在海邊沙灘上，用力踩踏濕潤的沙子，沙子會突然變軟、甚至滲出水來對吧？<br>
+                土壤液化就是這樣！在地下水飽和的疏鬆沙質土壤中，地震強烈的搖晃會讓土壤顆粒間的水壓瞬間升高，把沙粒「撐開」。土壤瞬間失去承載力，變得像液體一樣，導致地表上的建築物傾斜、甚至沉下去！</p>
+            </div>
+        </section>
+
+        <!-- Topic 5 -->
+        <section class="bg-white rounded-2xl shadow-md p-8 section-card border-l-4 border-purple-500">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6"><i class="fa-solid fa-crystal-ball text-purple-500 mr-2"></i> 主題五：我們能「預言」地震嗎？</h2>
+            
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">預報 (Forecasting) vs. 預測 (Prediction)</h3>
+                <p>大家最愛問：「教授，明天會不會大地震？」很抱歉，以人類目前的科技，我們無法做到精準的<strong>地震預測 (Prediction)</strong>（明確指出時間、地點、規模）。</p>
+                <p>但我們可以做<strong>地震預報 (Forecasting)</strong>！就像氣象降雨機率一樣，我們可以利用歷史數據計算出：「未來 50 年內，加州聖安地列斯斷層發生規模 7.0 以上地震的機率是 60%」。</p>
+            </div>
+
+            <div class="flex justify-center mb-6">
+                <div class="image-container w-full max-w-lg">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/1214.png" alt="圖1.2-14" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.2.14'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.2-14：地震預報的機率模型。我們知道它會來，只是不知道確切是哪一天。</p>
+                </div>
+            </div>
+
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">什麼是 Seismic Gap (地震空窗區)？</h3>
+                <p>看看一條長長的活動斷層，如果大部分區段在過去百年內都發生過大地震釋放了能量，唯獨「某個區段」異常安靜，幾百年沒動靜了。這個安靜的區域就叫 <strong>Seismic Gap</strong>。</p>
+                <p>小心！這不是因為它脾氣好，而是它被「卡死」了，正在瘋狂累積應力！這裡就是未來最有可能發生毀滅性大地震的頭號嫌疑犯！</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/1215.png" alt="圖1.2-15" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.2.15'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.2-15：沿著斷層的破裂歷史分佈，尋找未破裂的空窗區。</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/1216.png" alt="圖1.2-16" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.2.16'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.2-16：利用 Seismic gap 概念標示出的高風險危害區。</p>
+                </div>
+            </div>
+
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed">
+                <h3 class="text-2xl font-bold text-gray-800">科學家試圖預測地震的方法 (雖然還不完美)：</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li><strong>前震 (Foreshocks)：</strong> 大地震前偶爾會有小群震，但問題是，不是所有群震都會引發大地震。</li>
+                    <li><strong>地表微小變形：</strong> 使用高精度 GPS 監測地殼的擠壓變形。</li>
+                    <li><strong>地下水與氡氣：</strong> 岩石破裂前產生微裂隙，可能導致地下水位異常或放射性氡氣逸出。</li>
+                    <li><em>動物異常行為？</em> 雖然常有傳聞，但科學上尚未證實動物能準確預知地震，牠們可能只是比人類早幾秒感受到 P 波而已喔！</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Topic 6 -->
+        <section class="bg-white rounded-2xl shadow-md p-8 section-card border-l-4 border-indigo-500">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6"><i class="fa-solid fa-radiation text-indigo-500 mr-2"></i> 主題六：地震學家的秘密任務——抓核試爆！</h2>
+            
+            <div class="prose max-w-none text-lg text-gray-700 leading-relaxed mb-6">
+                <p>你以為地震學家只看斷層嗎？錯了！我們還是國際和平的守護者！🕵️‍♂️ 當某個國家偷偷在地下進行核子試爆時，即使他們不說，地震儀也會把他們抓出來。怎麼做到的？</p>
+                <p><strong>大自然地震 vs. 人工核爆的特徵差異：</strong></p>
+                <ul class="list-disc pl-6 space-y-2 mt-4">
+                    <li><strong>波形比例：</strong> 自然地震是斷層的「錯動摩擦」，會產生非常強的 <strong>S波和表面波</strong>。但核爆是中心向外「均勻膨脹」，會產生極強的 <strong>P波（壓縮波）</strong>，而 S 波相對微弱。</li>
+                    <li><strong>深度：</strong> 核爆通常非常淺（地表下幾公里以內），而許多自然地震可以深達幾十到幾百公里。</li>
+                </ul>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/1218.png" alt="圖1.2-18" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.2.18'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.2-18：比較自然地震（上）與核子試爆（下）的地震波形。可以明顯看出核爆的 P 波初動極強，但缺乏後續龐大的表面波。</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch1/main/1219.png" alt="圖1.2-19" onerror="this.src='https://via.placeholder.com/400x300?text=Image+1.2.19'">
+                    <p class="text-sm text-center text-gray-500 mt-2">▲ 圖1.2-19：透過體波規模 (mb) 與表面波規模 (Ms) 的比例分析圖，科學家能明確將「地震集群」與「核爆集群」區分開來！</p>
+                </div>
+            </div>
+            
+            <div class="bg-indigo-50 p-4 rounded-lg mt-4 text-indigo-900 font-medium">
+                <i class="fa-solid fa-bullhorn mr-2"></i> 導師小叮嚀：如果你有任何關於這些圖表或理論的問題，隨時可以舉手發問！你的每個問題都是通往真理的鑰匙！💯
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="bg-gray-800 text-white rounded-2xl shadow-lg p-10 text-center relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+            <div class="relative z-10">
+                <h2 class="text-3xl font-bold mb-4">今天的探險就到這邊告一段落！🌍</h2>
+                <p class="text-xl font-light mb-8 max-w-3xl mx-auto">
+                    我們從地震波的本質，談到了風險評估，再到建築防震與核爆監測。地震學不只是枯燥的公式，它是保護人類生命、了解我們這顆美麗藍色星球的終極科學。
+                </p>
+                
+                <div class="bg-white text-gray-900 rounded-xl p-8 max-w-2xl mx-auto shadow-2xl transform rotate-1">
+                    <h3 class="text-2xl font-bold text-red-600 mb-3"><i class="fa-solid fa-question-circle mr-2"></i> 導師的終極考驗</h3>
+                    <p class="text-lg leading-relaxed">
+                        既然我們知道「地震預測」目前是不可能的，而「建築防震」需要花費極大的成本。如果你是一座位於高 Seismic Hazard 區域（例如台灣或加州）的城市首長，在預算有限的情況下，<br><br>
+                        <strong>你會優先把經費投資在「建立更快速的地震預警系統 (早幾秒鐘發布警報)」，還是「全面補強老舊學校與醫院的建築結構」？為什麼？</strong>
+                    </p>
+                </div>
+                <p class="mt-8 text-gray-400 text-sm">期待你們的精彩解答！我們下次見！👋</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slider = document.getElementById('eq-slider');
+            const shortBuilding = document.getElementById('short-building');
+            const tallBuilding = document.getElementById('tall-building');
+
+            function updateResonance() {
+                const val = parseInt(slider.value); // 1 to 10
+                
+                // Clear animations
+                shortBuilding.classList.remove('shake-fast', 'shake-slow');
+                tallBuilding.classList.remove('shake-fast', 'shake-slow');
+                shortBuilding.style.transform = 'rotate(0deg)';
+                tallBuilding.style.transform = 'rotate(0deg)';
+
+                // High frequency (value > 7) -> short building resonates
+                if (val >= 7) {
+                    shortBuilding.classList.add('shake-fast');
+                    // Tall building shakes just a little, no resonance
+                    tallBuilding.style.transform = `rotate(${Math.random() * 2}deg)`;
+                } 
+                // Low frequency (value < 4) -> tall building resonates
+                else if (val <= 4) {
+                    tallBuilding.classList.add('shake-slow');
+                    // Short building shakes just a little
+                    shortBuilding.style.transform = `rotate(${Math.random() * 2}deg)`;
+                }
+                // Middle -> both shake moderately but no extreme resonance
+                else {
+                    shortBuilding.style.transform = `rotate(${(Math.random() - 0.5) * 4}deg)`;
+                    tallBuilding.style.transform = `rotate(${(Math.random() - 0.5) * 4}deg)`;
+                    
+                    // Add a tiny timeout to keep the mid-range moving dynamically if held
+                    setTimeout(() => {
+                        if(slider.value > 4 && slider.value < 7) updateResonance();
+                    }, 100);
+                }
+            }
+
+            slider.addEventListener('input', updateResonance);
+            // Initial call
+            updateResonance();
+        });
+    </script>
+</body>
+</html>
